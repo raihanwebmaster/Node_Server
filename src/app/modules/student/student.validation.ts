@@ -32,6 +32,7 @@ const localGuardianSchema = z.object({
 
 const studentSchema = z.object({
   id: z.string(),
+  password: z.string().max(20),
   name: userNameSchema,
   gender: z.enum(['male', 'female', 'other'])
     .refine(value => ['male', 'female', 'other'].includes(value), {
@@ -51,6 +52,7 @@ const studentSchema = z.object({
   localGuardian: localGuardianSchema,
   profileImg: z.string().optional(),
   isActive: z.enum(['active', 'blocked']).default('active'),
+  isDeleted: z.boolean()
 });
 
 export const StudentZodSchema = studentSchema;
